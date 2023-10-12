@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>CreateEnvironment</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-10-11"><meta name="DC.source" content="CreateEnvironment.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Load Door into Matlab</a></li><li><a href="#4">Load EStop</a></li><li><a href="#6">Load Fences</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> [] = CreateEnvironment()
+</pre><pre class="codeinput">axis <span class="string">equal</span>;
+view(3);
+camlight;
+hold <span class="string">on</span>;
+
+
+<span class="comment">% table = PlaceObject('tableBrown2.1x1.4x0.5m.ply', [0,0,0]);</span>
+            <span class="comment">% Create the Floor</span>
+            surf([-5,-5;5,5] <span class="keyword">...</span>
+            ,[-5,4;-5,4] <span class="keyword">...</span>
+            ,[0.01,0.01;0.01,0.01] <span class="keyword">...</span>
+            ,<span class="string">'CData'</span>,imread(<span class="string">'concrete.jpg'</span>) <span class="keyword">...</span>
+            ,<span class="string">'FaceColor'</span>,<span class="string">'texturemap'</span>);
+
+            <span class="comment">%Create the walls</span>
+            surf([-5,5;-5,5] <span class="keyword">...</span>
+            ,[4,4;4,4] <span class="keyword">...</span>
+            ,[0,0;4,4] <span class="keyword">...</span>
+            ,<span class="string">'CData'</span>,imread(<span class="string">'concrete.jpg'</span>) <span class="keyword">...</span>
+            ,<span class="string">'FaceColor'</span>,<span class="string">'texturemap'</span>);
+
+            surf([-5,5;-5,5] <span class="keyword">...</span>
+            ,[-5,-5;-5,-5] <span class="keyword">...</span>
+            ,[0,0;4,4] <span class="keyword">...</span>
+            ,<span class="string">'CData'</span>,imread(<span class="string">'concrete.jpg'</span>) <span class="keyword">...</span>
+            ,<span class="string">'FaceColor'</span>,<span class="string">'texturemap'</span>);
+
+            surf([5,5;5,5] <span class="keyword">...</span>
+            ,[-5,4;-5,4] <span class="keyword">...</span>
+            ,[0,0;4,4] <span class="keyword">...</span>
+            ,<span class="string">'CData'</span>,imread(<span class="string">'concrete.jpg'</span>) <span class="keyword">...</span>
+            ,<span class="string">'FaceColor'</span>,<span class="string">'texturemap'</span>);
+
+            surf([-5,-5;-5,-5] <span class="keyword">...</span>
+            ,[-5,4;-5,4] <span class="keyword">...</span>
+            ,[0,0;4,4] <span class="keyword">...</span>
+            ,<span class="string">'CData'</span>,imread(<span class="string">'concrete.jpg'</span>) <span class="keyword">...</span>
+            ,<span class="string">'FaceColor'</span>,<span class="string">'texturemap'</span>);
+            axis ([-5 5 -5 5 0 4])
+</pre><img vspace="5" hspace="5" src="CreateEnvironment_01.png" alt=""> <h2 id="3">Load Door into Matlab</h2><pre class="codeinput">door = PlaceObject(<span class="string">'door.ply'</span>, [0,4,0]);
+fireExt = PlaceObject(<span class="string">'fireExtinguisher.ply'</span>, [1.5,1.5,0]);
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="CreateEnvironment_02.png" alt=""> <h2 id="4">Load EStop</h2><pre class="codeinput">EStop = PlaceObject(<span class="string">'emergencyStopButton.ply'</span>, [3,3.8,2]);
+</pre><img vspace="5" hspace="5" src="CreateEnvironment_03.png" alt=""> <pre class="codeinput"><span class="comment">% EStop_Vert = [get(EStop, 'Vertices'), ones(size(get(EStop,'Vertices'),1),1)] *troty(pi/2);</span>
+<span class="comment">% set(EStop, 'Vertices', EStop_Vert(:,1:3));</span>
+<span class="comment">% set(person, 'Vertices', person_Vert(:,1:3));</span>
+<span class="comment">% EStop = EStop * troty(pi/2);</span>
+</pre><h2 id="6">Load Fences</h2><p>PlaceObject('barrier1.5x0.2x1m.ply', [0.75,1.5,0]); PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,1.5,0]); PlaceObject('barrier1.5x0.2x1m.ply', [0.75,-1.5,0]); PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,-1.5,0]); sideBarrier1 = PlaceObject('barrier1.5x0.2x1m.ply', [0.75,1.5,0]); sideBarrier2 = PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,-1.5,0]); sideBarrier3 = PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,1.5,0]); sideBarrier4 = PlaceObject('barrier1.5x0.2x1m.ply', [0.75,-1.5,0]);</p><p>sideBarrier1_Vert = [get(sideBarrier1, 'Vertices'), ones(size(get(sideBarrier1,'Vertices'),1),1)] *trotz(pi/2); set(sideBarrier1, 'Vertices', sideBarrier1_Vert(:,1:3));</p><p>sideBarrier2_Vert = [get(sideBarrier2, 'Vertices'), ones(size(get(sideBarrier2,'Vertices'),1),1)] *trotz(pi/2); set(sideBarrier2, 'Vertices', sideBarrier2_Vert(:,1:3));</p><p>sideBarrier3_Vert = [get(sideBarrier3, 'Vertices'), ones(size(get(sideBarrier3,'Vertices'),1),1)] *trotz(pi/2); set(sideBarrier3, 'Vertices', sideBarrier3_Vert(:,1:3));</p><p>sideBarrier4_Vert = [get(sideBarrier4, 'Vertices'), ones(size(get(sideBarrier4,'Vertices'),1),1)] *trotz(pi/2); set(sideBarrier4, 'Vertices', sideBarrier4_Vert(:,1:3)); %% Load Person into Matlab person = PlaceObject('personMaleConstruction.ply', [-0.9,1.8,0]); person_Vert = [get(person, 'Vertices'), ones(size(get(person,'Vertices'),1),1)] *trotz(pi); set(person, 'Vertices', person_Vert(:,1:3));</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function [] = CreateEnvironment()
+axis equal;
+view(3);
+camlight;
+hold on;
+
+
+% table = PlaceObject('tableBrown2.1x1.4x0.5m.ply', [0,0,0]);
+            % Create the Floor
+            surf([-5,-5;5,5] ...
+            ,[-5,4;-5,4] ...
+            ,[0.01,0.01;0.01,0.01] ...
+            ,'CData',imread('concrete.jpg') ...
+            ,'FaceColor','texturemap');
+
+            %Create the walls
+            surf([-5,5;-5,5] ...
+            ,[4,4;4,4] ...
+            ,[0,0;4,4] ...
+            ,'CData',imread('concrete.jpg') ...
+            ,'FaceColor','texturemap');
+
+            surf([-5,5;-5,5] ...
+            ,[-5,-5;-5,-5] ...
+            ,[0,0;4,4] ...
+            ,'CData',imread('concrete.jpg') ...
+            ,'FaceColor','texturemap');
+
+            surf([5,5;5,5] ...
+            ,[-5,4;-5,4] ...
+            ,[0,0;4,4] ...
+            ,'CData',imread('concrete.jpg') ...
+            ,'FaceColor','texturemap');
+
+            surf([-5,-5;-5,-5] ...
+            ,[-5,4;-5,4] ...
+            ,[0,0;4,4] ...
+            ,'CData',imread('concrete.jpg') ...
+            ,'FaceColor','texturemap');
+            axis ([-5 5 -5 5 0 4])
+%% Load Door into Matlab
+door = PlaceObject('door.ply', [0,4,0]);
+fireExt = PlaceObject('fireExtinguisher.ply', [1.5,1.5,0]);
+% 
+
+
+%% Load EStop
+EStop = PlaceObject('emergencyStopButton.ply', [3,3.8,2]);
+% EStop_Vert = [get(EStop, 'Vertices'), ones(size(get(EStop,'Vertices'),1),1)] *troty(pi/2);
+% set(EStop, 'Vertices', EStop_Vert(:,1:3));
+% set(person, 'Vertices', person_Vert(:,1:3));
+% EStop = EStop * troty(pi/2);
+
+
+%% Load Fences
+% PlaceObject('barrier1.5x0.2x1m.ply', [0.75,1.5,0]);
+% PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,1.5,0]);
+% PlaceObject('barrier1.5x0.2x1m.ply', [0.75,-1.5,0]);
+% PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,-1.5,0]);
+% sideBarrier1 = PlaceObject('barrier1.5x0.2x1m.ply', [0.75,1.5,0]);
+% sideBarrier2 = PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,-1.5,0]);
+% sideBarrier3 = PlaceObject('barrier1.5x0.2x1m.ply', [-0.75,1.5,0]);
+% sideBarrier4 = PlaceObject('barrier1.5x0.2x1m.ply', [0.75,-1.5,0]);
+% 
+% sideBarrier1_Vert = [get(sideBarrier1, 'Vertices'), ones(size(get(sideBarrier1,'Vertices'),1),1)] *trotz(pi/2);
+% set(sideBarrier1, 'Vertices', sideBarrier1_Vert(:,1:3));	
+% 
+% sideBarrier2_Vert = [get(sideBarrier2, 'Vertices'), ones(size(get(sideBarrier2,'Vertices'),1),1)] *trotz(pi/2);
+% set(sideBarrier2, 'Vertices', sideBarrier2_Vert(:,1:3));
+% 
+% sideBarrier3_Vert = [get(sideBarrier3, 'Vertices'), ones(size(get(sideBarrier3,'Vertices'),1),1)] *trotz(pi/2);
+% set(sideBarrier3, 'Vertices', sideBarrier3_Vert(:,1:3));	
+% 
+% sideBarrier4_Vert = [get(sideBarrier4, 'Vertices'), ones(size(get(sideBarrier4,'Vertices'),1),1)] *trotz(pi/2);
+% set(sideBarrier4, 'Vertices', sideBarrier4_Vert(:,1:3));
+% %% Load Person into Matlab
+% person = PlaceObject('personMaleConstruction.ply', [-0.9,1.8,0]);
+% person_Vert = [get(person, 'Vertices'), ones(size(get(person,'Vertices'),1),1)] *trotz(pi);
+% set(person, 'Vertices', person_Vert(:,1:3));
+##### SOURCE END #####
+--></body></html>
