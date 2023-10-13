@@ -37,7 +37,7 @@ hold on;
             ,[0,0;4,4] ...
             ,'CData',imread('concrete.jpg') ...
             ,'FaceColor','texturemap');
-            axis ([-5 5 -5 5 0 4])
+            axis ([-5 5 -5 8 0 4])
 %% Load Door into Matlab
 door = PlaceObject('door.ply', [0,4,0]);
 fireExt = PlaceObject('fireExtinguisher.ply', [1.5,1.5,0]);
