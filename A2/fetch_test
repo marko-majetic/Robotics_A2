@@ -1,0 +1,23 @@
+clear all
+close all
+clc
+set(0,'DefaultFigureWindowStyle','docked');
+%% Fetch test
+%toolboxloc = 2.5,3.5,0
+BuildWorld();
+
+robot = Fetch;
+pause(0.01)
+axis equal
+count = 100;
+
+toolboxLoc = [2.5,3.5,0];
+toolboxTr = transl(toolboxLoc);
+
+doorLoc = [0,4,0];
+doorTr = transl(doorLoc);
+
+
+RobotMovement.moveBetweenPoints(robot, toolboxLoc, doorLoc, count)
+
+
