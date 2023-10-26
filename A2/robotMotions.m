@@ -7,7 +7,11 @@ classdef robotMotions
             q1 = ARB.model.getpos();
             q2 = [-0.01 0 0 0 0 0 0];
             qMatrix = jtraj(q1,q2,steps);
-            ARB.model.animate(qMatrix);
+            for i = 1:size(qMatrix)
+                ARB.model.animate(qMatrix(i,:));
+                drawnow();
+                pause(0.01);
+            end
         end
 
         %% Collect tool function
