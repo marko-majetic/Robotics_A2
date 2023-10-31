@@ -43,7 +43,9 @@ hold on;
 door = PlaceObject('door.ply', [0,4,0]);
 fireExt = PlaceObject('fireExtinguisher.ply', [4.9,1.5,1.5]);
 % 
-
+% door1 = PlaceObject('door2.ply', [0,4,0]);
+curtain = PlaceObject('lightCurtain1.ply', [4.85,-2,0]);
+curtain2 = PlaceObject('lightCurtain2.ply', [-4.85,-2,0]);
 
 %% Load EStop
 EStop = PlaceObject('emergencyStopButton.ply', [4,4,2]);
@@ -54,6 +56,8 @@ broom = PlaceObject('broom.ply', [2.5,3.5,0]);
 % set(EStop, 'Vertices', EStop_Vert(:,1:3));
 % set(person, 'Vertices', person_Vert(:,1:3));
 % EStop = EStop * troty(pi/2);
+%% Load Cube
+% cube = PlaceObject('cube.ply', [3,4.31,2]);
 
 
 %% Load Fences
