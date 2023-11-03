@@ -65,8 +65,8 @@ hold on;
 %% Load Door into Matlab
 door = PlaceObject('door.ply', [0,4,0]);
 fireExt = PlaceObject('fireExtinguisher.ply', [4.9,1.5,1.5]);
-% 
-% door1 = PlaceObject('door2.ply', [0,4,0]);
+
+% door2 = PlaceObject('door2.ply', [0,4,0]);
 curtain = PlaceObject('lightCurtain1.ply', [4.85,-2,0]);
 curtain2 = PlaceObject('lightCurtain2.ply', [-4.85,-2,0]);
 
@@ -78,14 +78,6 @@ screwdriver = PlaceObject('screwdriver.ply', [1.2,3.3,0]);
 toolbox = PlaceObject('toolbox.ply', [1.2,3.5,0]);
 broom = PlaceObject('broom.ply', [1.2,3,0]);
 
-% [f,v,data] = plyread('broom.ply', [1.5,1.5,0]);
-% 
-% %Scale colours to be 0-to-1
-% vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255 ;
-% 
-% %Plot trisurf
-% broom_h = trisurf(f,v(:,1),v(:,2), v(:,3) ...
-%     , 'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting','flat');
 
 %% Load Fences
 PlaceObject('barrier1.5x0.2x1m.ply', [0.75,0.8,0]);
@@ -108,7 +100,10 @@ set(sideBarrier3, 'Vertices', sideBarrier3_Vert(:,1:3));
 
 sideBarrier4_Vert = [get(sideBarrier4, 'Vertices'), ones(size(get(sideBarrier4,'Vertices'),1),1)] *trotz(pi/2);
 set(sideBarrier4, 'Vertices', sideBarrier4_Vert(:,1:3));
-% %% Load Person into Matlab
-% person = PlaceObject('personMaleConstruction.ply', [-0.9,1.8,0]);
-% person_Vert = [get(person, 'Vertices'), ones(size(get(person,'Vertices'),1),1)] *trotz(pi);
-% set(person, 'Vertices', person_Vert(:,1:3));
+
+%Load safety zone
+            surf([-1.6,-1.6;1.6,1.6] ...
+            ,[0.75,4;0.75,4] ...
+            ,[0.02,0.02;0.02,0.02] ...
+            ,'CData',imread('tape2.jpg') ...
+            ,'FaceColor','texturemap');
