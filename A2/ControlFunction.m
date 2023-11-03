@@ -1,7 +1,7 @@
-%CreateEnvironment();                             %Generate the environment
-%repairObjects.box1();                            %Generate the objects that the robot interacts with
-%repairObjects.box2();
-%repairObjects.solarPanel();
+CreateEnvironment();                             %Generate the environment
+repairObjects.box1();                            %Generate the objects that the robot interacts with
+repairObjects.box2();
+repairObjects.solarPanel();
 
 ARB = IRB1660ID(transl(-2, 4, 1.6));             %Call the robot
 ARB.model.animate([-0.01 0 0 0 0 0 0]);          %Set in base position
