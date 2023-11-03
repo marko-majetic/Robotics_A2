@@ -4,8 +4,6 @@ view(3);
 camlight;
 hold on;
 
-
-% table = PlaceObject('tableBrown2.1x1.4x0.5m.ply', [0,0,0]);
             % Create the Floor
             surf([-5,-5;5,5] ...
             ,[-5,4;-5,4] ...
@@ -74,16 +72,20 @@ curtain2 = PlaceObject('lightCurtain2.ply', [-4.85,-2,0]);
 
 %% Load EStop
 EStop = PlaceObject('emergencyStopButton.ply', [4,4,2]);
-%% Load Screwdriver
-screwdriver = PlaceObject('screwdriver.ply', [2.5,3.5,2]);
-toolbox = PlaceObject('toolbox.ply', [2.5,3.5,0]);
-broom = PlaceObject('broom.ply', [2.5,3.5,0]);
-% set(EStop, 'Vertices', EStop_Vert(:,1:3));
-% set(person, 'Vertices', person_Vert(:,1:3));
-% EStop = EStop * troty(pi/2);
-%% Load Cube
-% cube = PlaceObject('cube.ply', [3,4.31,2]);
+%% Load Tools
+camera = PlaceObject('camera.ply',[1.2,3.2,0]);
+screwdriver = PlaceObject('screwdriver.ply', [1.2,3.3,0]);
+toolbox = PlaceObject('toolbox.ply', [1.2,3.5,0]);
+broom = PlaceObject('broom.ply', [1.2,3,0]);
 
+% [f,v,data] = plyread('broom.ply', [1.5,1.5,0]);
+% 
+% %Scale colours to be 0-to-1
+% vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255 ;
+% 
+% %Plot trisurf
+% broom_h = trisurf(f,v(:,1),v(:,2), v(:,3) ...
+%     , 'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting','flat');
 
 %% Load Fences
 PlaceObject('barrier1.5x0.2x1m.ply', [0.75,0.8,0]);
