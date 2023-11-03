@@ -199,5 +199,14 @@ classdef robotMotions
                 pause(0.01);
             end
         end
+        %% Collision avoidance function
+        % This function detects and avoids collisions between the robot and environment
+        %function collisionAvoidance
+            %Find position of robot joints
+            %if robot intersects with object
+                %disp('Collision detected')
+                %move away from collsion
+                %Plan new path
+        %end
     end
 end
